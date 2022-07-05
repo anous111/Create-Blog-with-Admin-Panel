@@ -37,7 +37,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('admin.login');
+        $newpwd = bcrypt("anisadmin");
+        return view('admin.login',compact("newpwd"));
     }
 
 

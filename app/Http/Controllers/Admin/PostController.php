@@ -8,6 +8,8 @@ use App\Model\user\post;
 use App\Model\user\tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -64,7 +66,9 @@ class PostController extends Controller
             'image' => 'required',
             ]);
         if ($request->hasFile('image')) {
-            $imageName = $request->image->store('public');
+            $imageName   = time() .  $request->image->getClientOriginalName();
+            Storage::disk('public')->put( "posts/".$imageName, File::get($request->image));
+            // $imageName = $request->image->store('posts');
         }else{
             return 'No';
         }
@@ -123,14 +127,18 @@ class PostController extends Controller
             'title'=>'required',
             'subtitle' => 'required',
             'slug' => 'required',
-            'body' => 'required',
-            'image'=>'required'
+            'body' => 'required'
             ]);
         if ($request->hasFile('image')) {
-            $imageName = $request->image->store('public');
+            $imageName   = time() .  $request->image->getClientOriginalName();
+            Storage::disk('public')->put( "posts/".$imageName, File::get($request->image));
+            //$imageName = $request->image->store('posts');
         }
+
         $post = post::find($id);
+        if ($request->hasFile('image')) {
         $post->image = $imageName;
+        }
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
         $post->slug = $request->slug;

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\user\category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -50,10 +52,23 @@ class CategoryController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'slug' => 'required',
+            'description' => 'required',
+            'color' => 'required',
             ]);
+            if ($request->hasFile('image')) {
+                $imageName   = time() .  $request->image->getClientOriginalName();
+                Storage::disk('public')->put( "categories/".$imageName, File::get($request->image));
+                // $imageName = $request->image->store('posts');
+             }
+            else{
+                 return 'No';
+             }
         $category = new category;
         $category->name = $request->name;
         $category->slug = $request->slug;
+        $category->description = $request->description;
+        $category->color = $request->color;
+        $category->image = $imageName;
         $category->save();
 
         return redirect(route('category.index'));
@@ -94,10 +109,24 @@ class CategoryController extends Controller
         $this->validate($request,[
             'name' => 'required',
             'slug' => 'required',
+            'description' => 'required',
+            'color' => 'required',
             ]);
+            if ($request->hasFile('image')) {
+                $imageName   = time() .  $request->image->getClientOriginalName();
+                Storage::disk('public')->put( "categories/".$imageName, File::get($request->image));
+                // $imageName = $request->image->store('posts');
+            }else{
+                return 'No';
+            }
         $category = category::find($id);
         $category->name = $request->name;
         $category->slug = $request->slug;
+        $category->description = $request->description;
+        $category->color = $request->color;
+        if ($request->hasFile('image')) {
+        $category->image = $imageName;
+        }
         $category->save();
 
         return redirect(route('category.index'));

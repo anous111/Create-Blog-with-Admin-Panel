@@ -52,6 +52,9 @@
                 </div>
                 
               </div>
+              @if( $post->image)
+                <img src="{{asset('storage/'.'/posts/'.$post->image)}}"/>
+              @endif
               <div class="col-lg-6">
                 <br>
                 <div class="form-group">
@@ -121,7 +124,7 @@
 
              <div class="box-footer">
               <input type="submit" class="btn btn-primary">
-              <a href='{{ route('post.index') }}' class="btn btn-warning">Back</a>
+              <a href="{{ route('post.index') }}" class="btn btn-warning">Back</a>
             </div>
           </form>
         </div>

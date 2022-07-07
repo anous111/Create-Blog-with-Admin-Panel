@@ -47,6 +47,9 @@
                           <th>S.No</th>
                           <th>Tag Name</th>
                           <th>Slug</th>
+                          <th>Description</th>
+                          <th>Color</th>
+                          <th>Image</th>
                           <th>Edit</th>
                           <th>Delete</th>
                         </tr>
@@ -57,6 +60,9 @@
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->slug }}</td>
+                            <td>{{ $category->description }}</td>
+                            <td>{{ $category->color }}</td>
+                            <td>{{$category->image}}</td>
                               <td><a href="{{ route('category.edit',$category->id) }}"><span class="glyphicon glyphicon-edit"></span></a></td>
                               <td>
                                 <form id="delete-form-{{ $category->id }}" method="post" action="{{ route('category.destroy',$category->id) }}" style="display: none">

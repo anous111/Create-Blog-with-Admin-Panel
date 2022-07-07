@@ -42,10 +42,22 @@
 	                <label for="slug">Category Slug</label>
 	                <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug" value="{{ $category->slug }}">
 	              </div>
+                  <div class="form-group">
+	                <label for="slug">Category description</label>
+	                <input type="text" class="form-control" id="description" name="description" placeholder="Description"  value="{{ $category->description }}">
+	              </div>
 
+				  <div class="form-group">
+	                <label for="slug">Category color</label>
+	                <input type="color" class="form-control" id="color" name="color" placeholder="Color" style="width: 45px;" value="{{ $category->color }}">
+	              </div>
+				  <div class="form-group">
+                    <label for="image">Category image</label>
+                    <input type="file" name="image" id="image" value="{{ $category->image}}">
+                  </div>
 	            <div class="form-group">
 	              <button type="submit" class="btn btn-primary">Submit</button>
-	              <a href='{{ route('category.index') }}' class="btn btn-warning">Back</a>
+	              <a href="{{ route('category.index') }}" class="btn btn-warning">Back</a>
 	            </div>
 	            	
 	            </div>

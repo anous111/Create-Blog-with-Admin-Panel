@@ -28,7 +28,7 @@
 	    		@include('includes.messages')      
 	          <!-- /.box-header -->
 	          <!-- form start -->
-	          <form role="form" action="{{ route('category.store') }}" method="post">
+	          <form role="form" action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
 	          {{ csrf_field() }}
 	            <div class="box-body">
 	            <div class="col-lg-offset-3 col-lg-6">
@@ -53,7 +53,7 @@
 	              </div>
 				  <div class="form-group">
                     <label for="image">Category image</label>
-                    <input type="file" name="image" id="image">
+					<input type="file" name="image" id="image">
                   </div>
 
 	            <div class="form-group">

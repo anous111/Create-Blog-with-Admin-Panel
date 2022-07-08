@@ -49,11 +49,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+       
         $this->validate($request,[
             'name' => 'required',
             'slug' => 'required',
             'description' => 'required',
-            'color' => 'required',
+            'color' => 'required'
             ]);
             if ($request->hasFile('image')) {
                 $imageName   = time() .  $request->image->getClientOriginalName();
